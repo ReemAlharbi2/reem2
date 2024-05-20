@@ -1,0 +1,203 @@
+WindowManager:
+    HomePage:
+    CameraClick:
+
+<HomePage>:
+    name: 'Home Page'
+    # Other widgets for HomePage
+   
+    Image:
+        source: "img1.jpg"
+        size_hint: (0.5, 0.5)
+        pos: '105dp', '369dp'
+
+    Label:
+        text: "New Vision"
+        pos: '120dp', '550dp'
+        size_hint: (0.4, 0.0600)
+        font_size: 20
+        color: (0, 0, 0.66, 1)
+        halign: "center"
+        valign: "center"
+    # Other widgets for HomePage
+   
+    Label:
+        text:"Welcome to New Vision App\nthe app aim to help people who have color\ndeficiency to have a better vision of the objects color"
+        pos: '120dp','420dp'
+        size_hint:(0.4,0.0600)
+        font_size:20
+        color: (0,0,0.66,1)
+        halign:"center"
+        valign:"center"
+    Label:
+        text:"Please choose from the types below"
+        pos: '120dp','380dp'
+        size_hint:(0.4,0.0600)
+        font_size:20
+        color:(144,160,189,1)
+        halign:"center"
+        valign:"center"
+    # هنا سويت البتون تقريباً نفس خصائص الليبل لكن الأشياء الديدة ذكرتها لكم
+    Button:
+        text:'Deuteranomaly'
+        font_size:25
+        size_hint:(0.4,0.0600)
+        pos: '120dp','330dp'
+        # هنا ربطت البوتون بالصفحة حقت الكام مو أنا عطيت لكل صفحة اسم عشان اذا سويت كول لها استدعي اسمها فقط ؟ بالضبط هنا سميت صفحة الكام و استدعيتها بالاسم
+        on_release:
+            app.root.current = 'Cam Page'
+            # هنا الانميشين من اي اتجاه راح تطلع لي صفحة الكام راح تطلع من اليسار
+            root.manager.transition.direction="left"
+        # RGB لون الخط
+        color:(1,1,1,1)
+        # RGB لون الخلفية
+        background_color:(0,0,0.99,1)
+    # و باقي البوتون سويت نفس الشي
+    Button:
+        text:'Protanopia'
+        font_size:25
+
+        size_hint:(0.4,0.0600)
+        pos: '120dp','280dp'
+        on_release:
+            app.root.current = 'Cam Page'
+            root.manager.transition.direction="left"
+        color:(1,1,1,1)
+        background_color:(0,0,0.99,1)
+    Button:
+        text:'Tritanopia'
+        font_size:25
+
+        size_hint:(0.4,0.0600)
+        pos: '120dp','230dp'
+        on_release:
+            app.root.current = 'Cam Page'
+            root.manager.transition.direction="left"
+        color:(1,1,1,1)
+        background_color:(0,0,0.99,1)
+    # نفس خصائص الصورة نفس الشي شرحتها فوق
+    Image:
+        source:"img2.jpg"
+        size_hint:(0.3 , 0.2)
+        pos:'141dp','0dp'
+    # برضو هنا نفس خصائص الليبل شرحتها فوق
+    Label:
+        text:"Graduation Project \nComputer Science"
+        pos: '120dp','110dp'
+        size_hint:(0.4,0.0600)
+        font_size:20
+        color:(0,0,0.66,1)
+        halign:"center"
+        valign:"center"
+
+<CameraClick>:
+    name: 'Cam Page'
+   
+    Camera:
+        id: camera
+        pos: '0dp','240dp'
+        resolution: (5, 8)
+        #size_hint:(1,0.5000)
+        size_hint_y: 0.888
+        size_hint_x: 0.999
+        play: False
+        #يسمح لي أغير مقاس الصورة والكاميرة
+        allow_stretch: True
+
+    Image:
+        id: camera_image
+        pos: '0dp', '210dp'
+        size_hint_x: 0.999
+        size_hint_y: 0.699
+        #size: 400,100
+        allow_stretch: True
+
+    BoxLayout:
+        orientation: 'vertical'
+        pos: '50dp','145dp'
+        size_hint: (0.7,0.15)
+        size: 400,300
+
+        Label:
+            text:"Hue:"
+            pos: '5dp','-20dp'
+            size_hint:(0.4,0.0600)
+            font_size:22
+            color:(0,0,0.66,1)
+            #halign:"left"
+            #valign:"middle"
+
+        Slider:
+            orientation: 'horizontal'
+            #pos: '70dp','-20dp'
+            min: -180
+            max: 180
+            value: root.hue_value
+            on_value: root.hue_value = self.value
+       
+        Label:
+            text:"Lightness:"
+            pos: '5dp','203dp'
+            size_hint:(0.4,0.0600)
+            font_size:22
+            color:(0,0,0.66,1)
+            #halign:"left"
+            #valign:"middle"
+
+        Slider:
+            orientation: 'horizontal'
+            #pos: '70dp','-30dp'
+            min: -180
+            max: 180
+            value: root.lightness_value
+            on_value: root.lightness_value = self.value
+        Label:
+            text:"Saturation:"
+            pos: '5dp','183dp'
+            size_hint:(0.4,0.0600)
+            font_size:22
+            color:(0,0,0.66,1)
+            #halign:"left"
+            #valign:"middle"
+
+        Slider:
+            orientation: 'horizontal'
+            #pos: '70dp','-40dp'
+            min: -180
+            max: 180
+            value: root.saturation_value
+            on_value: root.saturation_value = self.value
+
+    
+
+    Button:
+        text: 'Capture'
+        size_hint:(0.3,0.0600)
+        pos: '147dp','70dp'
+        # هنا سويت كول للميثود اللي بكود البايثون بتشوفون الميثود لو رحتوا لصفحة الكود
+        on_press: root.capture()
+        color:(1,1,1,1)
+        background_color:(0,0,0.99,1)
+
+    Button:
+        text: 'Color name'
+        size_hint:(0.3,0.0600)
+        pos: '147dp','25dp'
+        # هنا سويت كول للميثود اللي بكود البايثون بتشوفون الميثود لو رحتوا لصفحة الكود
+        on_press: root.color()
+        color:(1,1,1,1)
+        background_color:(0,0,0.99,1)   
+
+
+    Button:
+        text: 'Go Back'
+        height:'48dp'
+        size_hint:(0.3,0.0600)
+        pos: '0dp','550dp'
+
+        on_release:
+            app.root.current = 'Home Page'
+            root.manager.transition.direction = 'right'
+        color:(1,1,1,1)
+        background_color:(0,0,0.99,1)    
+         
